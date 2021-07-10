@@ -1,0 +1,44 @@
+.header{
+    display: flex;
+    background-color:#0A5E82;
+    align-items: center;
+    align-content: space-between;
+    color: white;
+}
+.logout{
+    display: flex;
+}
+.sidebar{
+    height: 100vh;
+    background-color: wheat;
+    width: 20%;
+    align-content: center;
+    padding: 5px;
+}
+.sidebar .sidebar-button{
+    margin: 5px;
+    display: block;
+    width: 90%;
+}
+.myDIV{
+    display: block;
+}
+.myDIV .hello{
+    margin:auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 30%;
+    background-color: #74A5C6;
+    height: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    align-items: center;
+    color: #000;
+}
+.body{
+    background-color: white;
+}
+.content{
+    background-color: white;
+}
