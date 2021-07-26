@@ -42,8 +42,8 @@ export default class EditProduct extends Component {
 
 	handleSubmit=(event,id)=>{
 		event.preventDefault();
-        editBook(this.state.book,this.state.user.id).then((res)=>{
-            window.location.href=`/userdash/${this.state.userId}`
+        editBook(this.state.book,this.state.book.id).then((res)=>{
+            window.location.href=`/userdash/${this.state.user.id}`
         }).catch((err)=>{
             if(err.response.status===404){
                 this.setState({
@@ -91,32 +91,38 @@ export default class EditProduct extends Component {
        <li>
         <Button className="dash"  variant="contained" color="primary" onClick={()=>window.location.href='/'}> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>&nbsp;Return to Home</Button>
         </li>
-      <li class="nav-item   ">
+     <li class="nav-item   ">
           <a onClick={()=>window.location.href='/profile'} class="nav-link">
-            <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
-            <span>Your Profile</span>
+            <span class="sidebar-icon"><span class="fa fa-user-circle"></span></span>
+            <span>{this.state.user.username}</span>
           </a>
         </li>
-        <li class="nav-item   ">
-          <a onClick={()=>window.location.href='/userdash'} class="nav-link">
-            <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
-            <span>Your Products</span>
+        <li class="nav-item  active  ">
+          <a onClick={()=>window.location.href=`/userdash/${this.state.user.id}` } class="nav-link">
+            <span class="sidebar-icon"><span  class="fa fa-book"></span></span>
+            <span>Your Books</span>
           </a>
         </li>
-        <li class="nav-item active ">
+        <li class="nav-item ">
+          <a onClick={()=>window.location.href=`/bookorder/${this.state.user.id}`} class="nav-link">
+              <span class="sidebar-icon"><span class="fa fa-cart-plus"></span></span>
+              <span>Book Orders</span>
+          </a>
+        </li>
+        <li class="nav-item  ">
           <a onClick={()=>window.location.href='/addproducts'} class="nav-link">
-              <span class="sidebar-icon"><span class="fas fa-hand-holding-usd"></span></span>
-              <span>Add Products</span>
+              <span class="sidebar-icon"><span class="fa fa-plus"></span></span>
+              <span>Add Book</span>
           </a>
         </li>
         <li class="nav-item ">
           <a onClick={()=>window.location.href='/userorders'} class="nav-link">
-              <span class="sidebar-icon"><span class="fas fa-cog"></span></span>
+              <span class="sidebar-icon"><span class="fa fa-cart-plus"></span></span>
               <span>Your Orders</span>
           </a>
         </li>
-        <li>
-        <Logout />
+         <li>
+           <Logout />
         </li>
         </ul>
     </div>
@@ -217,7 +223,7 @@ export default class EditProduct extends Component {
                                                                 </p>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group">
+                                                         <div class="form-group">
                                                             <div class="form-group mb-4">
                                                                 <p className="formInfo"> Delivery<br/>
                                                                     <select id="p1" class="formSelect" style={myStyle} onChange={(e)=>this.handleChange(e)} name="delivery"  >
@@ -228,9 +234,9 @@ export default class EditProduct extends Component {
                                                                 </p>
                                                                
                                                             </div>
-                                                        </div>
+                                                        </div> 
 
-                                                         <div class="form-group">
+                                                         {/* <div class="form-group">
                                                             <div class="form-group mb-4">
                                                                 <p className="formInfo">Upload file
                                                                
@@ -238,10 +244,10 @@ export default class EditProduct extends Component {
                                                                       type="file" name='img'
                                                                       onChange={(e)=>this.handleImagePreview(e)}
                                                                   />
-                                                                {/*  <input style={{width:'100px'}} type="button" onClick={()=>this.handleSubmitFile()} value="upload"/>*/}
+                                                                <input style={{width:'100px'}} type="button" onClick={()=>this.handleSubmitFile()} value="upload"/>
                                                                  </p> 
                                                             </div>
-                                                        </div>
+                                                        </div> */}
 
                                                           <p className='formInfo'>
 

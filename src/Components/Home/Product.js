@@ -182,6 +182,7 @@ constructor(props){
           <div className="other-details">
              <div className="seller">
               <h5>Seller Details:</h5>
+              {/* <p>{this.state.book.addedBy.username}</p> */}
                
               </div>
             

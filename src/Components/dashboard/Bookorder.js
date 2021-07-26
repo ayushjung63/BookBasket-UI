@@ -83,14 +83,14 @@ export default class Bookorder extends Component {
             <span>{this.state.user.username}</span>
           </a>
         </li>
-        <li class="nav-item    ">
+        <li class="nav-item  active  ">
           <a onClick={()=>window.location.href=`/userdash/${this.state.user.id}` } class="nav-link">
             <span class="sidebar-icon"><span  class="fa fa-book"></span></span>
-            <span>Your Products</span>
+            <span>Your Books</span>
           </a>
         </li>
-         <li class="nav-item  active">
-          <a onClick={()=>window.location.href='/bookorder'} class="nav-link">
+        <li class="nav-item active ">
+          <a onClick={()=>window.location.href=`/bookorder/${this.state.user.id}`} class="nav-link">
               <span class="sidebar-icon"><span class="fa fa-cart-plus"></span></span>
               <span>Book Orders</span>
           </a>
@@ -98,7 +98,7 @@ export default class Bookorder extends Component {
         <li class="nav-item  ">
           <a onClick={()=>window.location.href='/addproducts'} class="nav-link">
               <span class="sidebar-icon"><span class="fa fa-plus"></span></span>
-              <span>Add Products</span>
+              <span>Add Book</span>
           </a>
         </li>
         <li class="nav-item ">
