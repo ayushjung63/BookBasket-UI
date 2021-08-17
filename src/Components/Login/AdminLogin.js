@@ -19,25 +19,25 @@ export class AdminLogin extends Component {
 		event.preventDefault();
 		var date=Date.now()
 
-		// adminLogin(this.state.username,this.state.password,3).then((res)=>{
-		// 	if(res==false){
-		// 		window.location.reload();
-		// 	}else{
-		// 	localStorage.setItem("admininfo",JSON.stringify(res));
-		// 	window.location.href='/admindash';
-		// 	console.log(res);
-		// 	console.log(localStorage.getItem('admininfo'));	
-		// }
-		// }).catch((err)=>{
-		// 	if(err.response.status===404){
-		// 		this.setState({username:'',password:''});
-		// 	}
-		// }
-		// )
-		if (this.state.username=='admin') {
-			window.location.href='/admindash';
+		adminLogin(this.state.username,this.state.password,3).then((res)=>{
+			if(res==false){
+				window.location.reload();
+			}else{
 			localStorage.setItem("admininfo",true);
+			window.location.href='/admindash';
+			console.log(res);
+			console.log(localStorage.getItem('admininfo'));	
 		}
+		}).catch((err)=>{
+			if(err.response.status===404){
+				this.setState({username:'',password:''});
+			}
+		}
+		)
+		// if (this.state.username=='admin') {
+		// 	window.location.href='/admindash';
+		// 	localStorage.setItem("admininfo",true);
+		// }
 	}
 	
 

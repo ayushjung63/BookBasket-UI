@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { getMyBookOrder } from '../../apiCall/OrderAPI'
 import {deleteBook } from '../../apiCall/BookAPI'
-import { Button } from '@material-ui/core'
 import Logout from "../Logout/Logout.js";
+import { Button, ButtonBase, Grid, Paper, Typography } from '@material-ui/core'
+import CancelIcon from '@material-ui/icons/Cancel';
+import WarningIcon from '@material-ui/icons/Warning';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -48,9 +50,35 @@ export default class Bookorder extends Component {
 
     render() {
       const {userId}=this.state;
-     const imgStyle={
-      width:'50px'
+     
+     const imgContainerStyle={
+      width: 128,
+      height: 128,
      }
+     const imgStyle={
+      margin: 'auto',
+      display: 'block',
+      maxWidth: '100%',
+      maxHeight: '100%',
+     }
+     const paperStyle={
+      padding:'10px',
+      marginTop:"20px",
+      marginBottom:'10px'
+     }
+     const header={
+       marginTop:"20px",
+       marginBottom:"20px",
+       backgroundColor:"#5B4B48",
+       color:"white",
+       height:"50px"
+     }
+     const error={
+      fontSize:"40px",
+      marginTop:"200px",
+      height:"100vh",
+      marginLeft:"120px"
+    }
         return (
             <div>
                 <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-md-none">
@@ -83,7 +111,7 @@ export default class Bookorder extends Component {
             <span>{this.state.user.username}</span>
           </a>
         </li>
-        <li class="nav-item  active  ">
+        <li class="nav-item   ">
           <a onClick={()=>window.location.href=`/userdash/${this.state.user.id}` } class="nav-link">
             <span class="sidebar-icon"><span  class="fa fa-book"></span></span>
             <span>Your Books</span>
@@ -114,52 +142,76 @@ export default class Bookorder extends Component {
     </div>
 </nav>
 
-
-
-
-
-
-
-
+{(this.state.books==[] ||this.state.books=='')?
+              <div>
+              <Typography gutterBottom variant="subtitle1" style={error}>
+                <WarningIcon style={{fontSize:"40px"}} /> NO DATA FOUND
+              </Typography>
+              </div>
+                :
 
                 
                     <main class="content">
-
+                      <div>
+                       <Typography gutterBottom variant="body1" style={header}>
+                           Book Order Request
+                        </Typography>
+                       </div>
           
 
 
-                        <div class= " mt-5">
+                    <div>
+                      {this.state.books.map((item)=>
+                      <Paper style={paperStyle} >
+        <Grid container >
+          <Grid item>
+            <ButtonBase style={imgContainerStyle}>
+              <img alt="complex" src={item.image} style={imgStyle} />
+            </ButtonBase>
+          </Grid>
+          <Grid item sm container>
+            <Grid item xs container direction="column" >
+              <Grid item xs>
+                <Typography gutterBottom variant="subtitle1" align="left">
+                 Title:{item.book.title}
+                </Typography>
+                <Typography variant="body2" gutterBottom  align="left">
+                  Author:{item.book.author}
+                </Typography>
+                <Typography variant="body2" gutterBottom  align="left">
+                  Type:{item.book.type}
+                </Typography>
+                <Typography variant="body2" gutterBottom  align="left" >
+                  Delivery:{item.book.delivery}
+                </Typography>
+                
+              </Grid>
+            </Grid>
 
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                       <th>Book Title</th>
-                                       <th>Price</th>
-                                       <th>Type</th>
-                                       <th>Boooked By</th>
-                                       <th>Contact</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {this.state.books.map((item)=>
-                                    <tr>
-                                        <td>
-                                            <span class="font-weight-normal">{item.book.title}</span>
-                                        </td>
-                                        <td><span class="font-weight-normal">{item.book.price} </span></td>                        
-                                        <td><span class="font-weight-normal">{item.book.type}</span></td>
-                                         <td><span class="font-weight-bold text-warning">{item.user.username}</span></td>
-                                        <td><span class="font-weight-bold">{item.user.contact}</span></td>
-                                    </tr>
-                                     )}
-                           
-                                                
-                                </tbody>
-                            </table>
-                           
-                        </div>
-                        
+           < Grid item xs sm container direction="column" spacing={2}>
+          
+                
+            <Typography gutterBottom variant="subtitle1">
+                  Ordered By:{item.user.username}
+                </Typography>
+                <Typography gutterBottom variant="subtitle1"  >
+                 Contact:{item.user.contact}
+                </Typography>
+                <Typography gutterBottom variant="subtitle1"  >
+                 Address:{item.user.address}
+                </Typography>
+                <Typography style={{cursor:"pointer",color:"red"}} variant="body2" color="textSecondary"  >
+                        <CancelIcon/>Cancel
+                </Typography>
+          </Grid>
+
+          </Grid>
+        </Grid>
+      </Paper>
+       )}
+                      </div>
                     </main>
+    }
                 </div>
             </div>
         </div>

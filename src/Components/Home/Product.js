@@ -50,7 +50,7 @@ constructor(props){
   componentDidMount() {
     this.getBook(this.state.id);
     this.setState({open: false});
-    console.log((this.state.delivery==="AVAILABLE"))
+    console.log(this.state.user.id)
     this.setState({seller:this.state.book.addedBy})
   }
    handleChange=(event)=>{
@@ -171,7 +171,7 @@ constructor(props){
             <div className="product-details">
               <h3>{this.state.book.title}</h3>
               <h5><small>by </small>{this.state.book.author}</h5>
-              <p>{this.state.book.category}</p>
+              <p style={{color:"#F25B0A",fontWeight:600}}>{this.state.book.category}</p>
               <p>
                {this.state.book.description}
               
@@ -182,7 +182,10 @@ constructor(props){
           <div className="other-details">
              <div className="seller">
               <h5>Seller Details:</h5>
-              {/* <p>{this.state.book.addedBy.username}</p> */}
+              <p>Username: {this.state.book?.addedBy?.username}</p> 
+              <p>Contact: {this.state.book?.addedBy?.contact}</p> 
+              <p>Email: {this.state.book?.addedBy?.email}</p> 
+              <p>Address: {this.state.book?.addedBy?.address}</p> 
                
               </div>
             

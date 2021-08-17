@@ -308,7 +308,7 @@ align-self: center;
 .dropdown-content {
 	display: block;
 	position: absolute;
-	top:93%;
+	top:95%;
 	left:20%;
 	box-shadow: 0px 0px 2px 0px;
 	background-color: #74A5C6;
@@ -318,7 +318,7 @@ align-self: center;
 .dropdown-content2 {
 	display: block;
 	position: absolute;
-	top:24%;
+	top:25%;
 	left:20%;
 	box-shadow: 0px 0px 2px 0px;
 	background-color: #74A5C6;

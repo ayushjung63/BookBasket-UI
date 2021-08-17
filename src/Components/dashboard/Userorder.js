@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Button } from '@material-ui/core'
+import { Button, ButtonBase, Grid, Paper, Typography } from '@material-ui/core'
 import { getParticularUserOrder } from '../../apiCall/OrderAPI';
 import { cancelOrder } from '../../apiCall/OrderAPI';
 import './dash.css';
 import Logout from "../Logout/Logout.js";
+import CancelIcon from '@material-ui/icons/Cancel';
+import WarningIcon from '@material-ui/icons/Warning';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -59,6 +61,34 @@ export default class Userorder extends Component {
 
     render() {
          const {id}=this.state;
+         const imgContainerStyle={
+          width: 128,
+          height: 128,
+         }
+         const imgStyle={
+          margin: 'auto',
+          display: 'block',
+          maxWidth: '100%',
+          maxHeight: '100%',
+         }
+         const paperStyle={
+          padding:'10px',
+          marginTop:"20px",
+          marginBottom:'10px'
+         }
+         const header={
+           marginTop:"20px",
+           marginBottom:"20px",
+           backgroundColor:"#5B4B48",
+           color:"white",
+           height:"50px"
+         }
+         const error={
+          fontSize:"40px",
+          marginTop:"200px",
+          marginLeft:"120px",
+          height:"100vh"
+        }
         return (
             <div>
 
@@ -115,75 +145,80 @@ export default class Userorder extends Component {
 
 
 
-
+{(this.state.order==[] ||this.state.order=='')?
+              <div>
+              <Typography gutterBottom variant="subtitle1" style={error}>
+                <WarningIcon style={{fontSize:"40px"}} /> NO DATA FOUND
+              </Typography>
+              </div>
+                :
 
 
                 
                     <main class="content">
+                
+                       <div>
+                       <Typography gutterBottom variant="body1" style={header}>
+                           Orders Placed
+                        </Typography>
+                       </div>
 
-                       
 
-
-                        <div class="card card-body border-light shadow-sm">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Ordered Book</th>						
-                                        <th>Author</th>
-                                        <th>Price</th>
-                                        <th>Type</th>
-                                        <th>Ordered From</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {this.state.order.map((item)=>
-                                    <tr>
-                                       
-                                        <td>
-                                            <span class="font-weight-normal">{item.book.title}</span>
-                                        </td>
-                                        <td><span class="font-weight-normal">{item.book.author}</span></td>                        
-                                        <td><span class="font-weight-normal">{item.book.price}0</span></td>
-                                        <td><span class="font-weight-bold">{item.book.type}</span></td>
-                                        <td><span class="font-weight-bold text-warning">{item.book.addedBy.username}</span></td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <Button variant="contained" color="primary" onClick={(e)=>this.handleClickOpen(e)} >Cancel</Button>
-                                            </div>
-                                        
-                                            <Dialog
-                                            open={this.state.open}
-                                            onClose={this.handleClose}
-                                            aria-labelledby="alert-dialog-title"
-                                            aria-describedby="alert-dialog-description"
-                                          >
-                                            <DialogContent>
-                                              <DialogContentText id="alert-dialog-description">
-                                                Are you sure you want  to delete <b>{item.title}</b> ?
-                                              </DialogContentText>
-                                            </DialogContent>
-                                            <DialogActions>
-                                              <Button onClick={(e)=>this.cancelOrders(e,item.id)} color="primary">
-                                               Delete
-                                              </Button>
-                                              <Button onClick={(e)=>this.handleClose(e)} color="secondary" autoFocus>
-                                                Cancel
-                                              </Button>
-                                            </DialogActions>
-                                          </Dialog>
-
-                                        </td>
-                                    </tr>
-                                    )}
+                        
                            
-                                                
-                                </tbody>
-                            </table>
-                           
-                        </div>
+                    <div>
+                      {this.state.order.map((item)=>
+                      <Paper style={paperStyle} >
+        <Grid container >
+          <Grid item>
+            <ButtonBase style={imgContainerStyle}>
+              <img alt="complex" src={item.image} style={imgStyle} />
+            </ButtonBase>
+          </Grid>
+          <Grid item sm container>
+            <Grid item xs container direction="column" >
+              <Grid item xs>
+                <Typography gutterBottom variant="subtitle1" align="left">
+                 Title:{item.book.title}
+                </Typography>
+                <Typography variant="body2" gutterBottom  align="left">
+                  Author:{item.book.author}
+                </Typography>
+                <Typography variant="body2" gutterBottom  align="left">
+                  Type:{item.book.type}
+                </Typography>
+                <Typography variant="body2" gutterBottom  align="left" >
+                  Delivery:{item.book.delivery}
+                </Typography>
+                
+              </Grid>
+            </Grid>
+
+           < Grid item xs sm container direction="column" spacing={2}>
+          
+                
+            <Typography gutterBottom variant="subtitle1">
+                  Ordered From:{item.book.addedBy.username}
+                </Typography>
+                <Typography gutterBottom variant="subtitle1"  >
+                 Contact:{item.book.addedBy.contact}
+                </Typography>
+                <Typography gutterBottom variant="subtitle1"  >
+                 Address:{item.book.addedBy.address}
+                </Typography>
+                <Typography onClick={(e)=>this.cancelOrders(e,item.id)} style={{cursor:"pointer",color:"red"}} variant="body2" color="textSecondary"  >
+                        <CancelIcon/>Cancel
+                </Typography>
+          </Grid>
+
+          </Grid>
+        </Grid>
+      </Paper>
+       )}
+                      </div>
                         
                     </main>
+    }
                 </div>
             </div>
         </div>

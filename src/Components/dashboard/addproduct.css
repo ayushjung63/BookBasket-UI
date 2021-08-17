@@ -37,7 +37,8 @@
 	justify-content: center;
 }
 .formBtn{
-	width: 100%;
+	margin: auto;
+	width: 110%;
 	height: 40px;
 	background-color: #4696DC;
 	border: none;

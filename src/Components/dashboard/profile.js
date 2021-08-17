@@ -49,7 +49,7 @@ export default class Profile extends Component {
             <span>{this.state.user.username}</span>
           </a>
         </li>
-        <li class="nav-item  active  ">
+        <li class="nav-item    ">
           <a onClick={()=>window.location.href=`/userdash/${this.state.user.id}` } class="nav-link">
             <span class="sidebar-icon"><span  class="fa fa-book"></span></span>
             <span>Your Books</span>

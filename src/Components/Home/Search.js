@@ -157,11 +157,11 @@ constructor(props){
     {this.state.books.map((item)=>
     <div className="book-card">
           <div className="book-img">
-              <img src={BookImage} />
+              <img src={item.image} />
           </div>
          <div className="book-data">
-            <p>{item.title}</p>
-            <p>{item.price}</p>
+            <p><b>{item.title}</b></p>
+            <p><i>Rs.{item.price}</i></p>
             <button class="view"><a style={{ cursor:"pointer" }} onClick={(e)=>window.location.href=`/pr/${item.id}`}>View More</a></button>
           </div>
         </div>

@@ -23,11 +23,15 @@ export class Login extends Component {
 		var date=Date.now()
 		addData(this.state.username,this.state.password,3).then((res)=>{
 			console.log(res)
+			if(res==null){
+				this.setState({error:"Bad Credentials. Please try again with valid username and password"})
+			}else{
 			localStorage.setItem("expiry_time",JSON.stringify(date+8640000));
 			localStorage.setItem("userinfo",JSON.stringify(res));
 			window.location.href=`/userdash/${res.id}`;
 			console.log(res);
 			console.log(localStorage.getItem('userInfo'));	
+			}
 		}).catch((err)=>{
 				this.setState({username:'',password:''});
 				this.setState({error:"ERROR: Could not connect to Server. Please try again later"})

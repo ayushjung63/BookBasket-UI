@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import { getUserBook } from '../../apiCall/BookAPI'
 import {deleteBook } from '../../apiCall/BookAPI'
-import { Button } from '@material-ui/core'
+import { Button, ButtonBase, Grid, Typography,Paper } from '@material-ui/core'
 import Logout from "../Logout/Logout.js";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-
+import WarningIcon from '@material-ui/icons/Warning';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 export default class Userorder extends Component {
 
   constructor(props){
@@ -66,14 +63,38 @@ export default class Userorder extends Component {
 
     render() {
       const {userId}=this.state;
-     const imgStyle={
-      width:'50px'
+     const imgContainerStyle={
+      width: 128,
+      height: 128,
      }
+     const imgStyle={
+      margin: 'auto',
+      display: 'block',
+      maxWidth: '100%',
+      maxHeight: '100%',
+     }
+     const paperStyle={
+      padding:'10px',
+      marginTop:"20px",
+      marginBottom:'10px'
+     }
+     const header={
+       marginTop:"20px",
+       marginBottom:"20px",
+       backgroundColor:"#5B4B48",
+       color:"white",
+       height:"50px"
+     }
+     const error={
+      fontSize:"40px",
+      marginTop:"200px",
+      height:"100vh",
+      marginLeft:"120px"
+    }
+
         return (
             <div>
                 <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-md-none">
-     }
-      }
     <a class="navbar-brand mr-lg-5" href="../../index.html">
         <img class="navbar-brand-dark" src="../../assets/img/brand/light.svg" alt="Volt logo" /> <img class="navbar-brand-light" src="../../assets/img/brand/dark.svg" alt="Volt logo" />
     </a>
@@ -139,47 +160,80 @@ export default class Userorder extends Component {
 
 
 
-
-                
+                {(this.state.books==[] ||this.state.books=='')?
+              <div>
+              <Typography gutterBottom variant="subtitle1" style={error}>
+                <WarningIcon style={{fontSize:"40px"}} /> NO DATA FOUND
+              </Typography>
+              </div>
+                    :
                     <main class="content">
+                    <div>
+                    <Typography gutterBottom variant="subtitle1" style={header}>
+                      My Books
+                    </Typography>
+                    </div>
+                      <div>
+                      {this.state.books.map((item)=>
+                      <Paper style={paperStyle} >
+        <Grid container >
+          <Grid item>
+            <ButtonBase style={imgContainerStyle}>
+              <img alt="complex" src={item.image} style={imgStyle} />
+            </ButtonBase>
+          </Grid>
+          <Grid item sm container>
+            <Grid item xs container direction="column" >
+              <Grid item xs>
+                <Typography gutterBottom variant="subtitle1" align="left">
+                 Title:{item.title}
+                </Typography>
+                <Typography variant="body2" gutterBottom  align="left">
+                  Author:{item.author}
+                </Typography>
+                <Typography variant="body2" gutterBottom  align="left">
+                  Type:{item.type}
+                </Typography>
+                <Typography variant="body2" color="textSecondary"  align="left">
+                 {item.description}
+                </Typography>
+                
+              </Grid>
+            </Grid>
 
-          
+           < Grid item xs sm container direction="column" spacing={2}>
+           <Typography variant="body1" gutterBottom  >
+                  Category:{item.category}
+                </Typography>
+                <Typography variant="body2" gutterBottom  >
+                  Delivery:{item.delivery}
+                </Typography>
+                      {(item.status=="BOOKED")?
+                <Typography variant="body2" gutterBottom style={{color:"#F25B0A",fontWeight:600}} >
+                  Status:{item.status}
+                </Typography>:
+                <Typography variant="body2" gutterBottom style={{color:"green",fontWeight:600}} >
+                Status:{item.status}
+              </Typography>
+                }
+
+                <Typography gutterBottom variant="subtitle1"  >
+                 Price:{item.price}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" >
+                 <EditIcon style={{cursor:"pointer",color:"blue"}} onClick={(e)=>this.handleEdit(e,item.id)}  /> &nbsp;&nbsp;
+                <DeleteForeverIcon style={{cursor:"pointer",color:"red"}} onClick={(e)=>this.handleDelete(e,item.id)} />
+                </Typography>
+          </Grid>
+
+          </Grid>
+        </Grid>
+      </Paper>
+       )}
+                      </div>
 
 
-                        <div class= " mt-5">
-
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>						
-                                        <th>Author</th>
-                                        <th>Price</th>
-                                        <th>Type</th>
-                                        <th>Category</th>
-                                        <th>Delivery</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {this.state.books.map((item)=>
-                                    <tr>
-                                        <td>
-                                            <span class="font-weight-normal">{item.title}</span>
-                                        </td>
-                                        <td><span class="font-weight-normal">{item.author} </span></td>                        
-                                        <td><span class="font-weight-normal">{item.price}</span></td>
-                                        <td><span class="font-weight-bold">{item.type}</span></td>
-                                        <td><span class="font-weight-bold">{item.category}</span></td>
-                                        <td><span class="font-weight-bold">{item.delivery} </span></td>
-                                        <td><span class="font-weight-bold text-warning">{item.status}</span></td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <Button variant="contained" color="primary" onClick={(e)=>this.handleEdit(e,item.id)}>Edit</Button>&nbsp;
-                                                 <Button variant="contained" color="primary" onClick={(e)=>this.handleDelete(e,item.id)}>Delete</Button> 
-                                            </div>
-                                        </td>
-                                        <Dialog
+                      {/* <Dialog
                                                 open={this.state.open}
                                                 onClose={this.handleClose}
                                                 aria-labelledby="alert-dialog-title"
@@ -192,23 +246,16 @@ export default class Userorder extends Component {
                                                 </DialogContent>
                                                 <DialogActions>
                                                   <Button onClick={(e)=>this.handleDelete(e,item.id)} color="primary">
-                                                   {/*Delete*/}{item.id}
+                                                   {item.id}
                                                 </Button>
                                                   <Button onClick={(e)=>this.handleClose(e)} color="secondary" autoFocus>
                                                     Cancel
                                                   </Button>
                                                 </DialogActions>
-                                          </Dialog>
-                                    </tr>
-                                     )}
-                           
-                                                
-                                </tbody>
-                            </table>
-                           
-                        </div>
+                                          </Dialog>  */}
                         
                     </main>
+    }
                 </div>
             </div>
         </div>

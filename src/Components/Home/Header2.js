@@ -9,6 +9,15 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 
 export class Header2 extends Component {
 	render() {
+    const iconStyle={
+      height: "50px",
+      width: "50px",
+      borderRadius: "50%",
+      display: "flex",
+      justifyContent:"center",
+      margin: "5px"
+    }
+    
 		return (
 			<div>
       <div className="header2">
@@ -16,9 +25,9 @@ export class Header2 extends Component {
 			<div className="social">
               <p>
                 <span><FacebookIcon /> </span>
-                <span><InstagramIcon /> </span>
-                <span><WhatsAppIcon/> </span>
-                <span><GitHubIcon/> </span>
+                <span><InstagramIcon  /> </span>
+                <span><WhatsAppIcon /> </span>
+                <span><GitHubIcon /> </span>
               </p>
               <p><PhoneIcon />+977-987654321</p>
               <p><MailIcon />info@bookbasket.com</p>

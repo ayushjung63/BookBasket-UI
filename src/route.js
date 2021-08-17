@@ -59,7 +59,7 @@ export class Routes extends Component {
 					this.state.adminLogin?
 					<Switch>
 						
-						<Route exact path="/admin" component={AdminLogin} />
+						<Route exact path="/admin" component={Admindashboard} />
 						<Route exact path="/admindash" component={Admindashboard} />
 						<Route exact path="/products" component={Productmanagement} />
 						<Route exact path="/users" component={UserManagement} />
