@@ -50,7 +50,6 @@ constructor(props){
   componentDidMount() {
     this.getBook(this.state.id);
     this.setState({open: false});
-    console.log(this.state.user.id)
     this.setState({seller:this.state.book.addedBy})
   }
    handleChange=(event)=>{
@@ -82,7 +81,7 @@ constructor(props){
     }else{
     orderBook(this.state.book.id,this.state.user.id,3)
     .then(function (res) {
-        window.location.href=`/userdash/${this.state.user.id}`
+        window.location.href=`/userorders/${this.state.user.id}`
       })
       .catch((err) => console.log(err));
   }
@@ -203,7 +202,7 @@ constructor(props){
              {/* onClick={(event)=>this.orderBooks(event)}*/}
              
              {(delivery==="AVAILABLE")
-             ?<Button onClick={(e)=>this.handleClickOpen(e)} variant="outlined" color="primary" className="orderButton" >Order Now</Button>
+             ?<Button onClick={(e)=>this.orderBooks(e)} variant="contained" disableElevation color="secondary" className="orderButton" >Order Now</Button>
              :<i><b>Delivery is not available. Please contact the seller for the book.</b></i>
               }
 

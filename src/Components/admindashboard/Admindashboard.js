@@ -8,6 +8,7 @@ import { Button } from '@material-ui/core'
 import { countBooks } from "../../apiCall/BookAPI";
 import { countUsers } from "../../apiCall/UserAPI";
 import { countOrders } from "../../apiCall/OrderAPI";
+import AdminLogout from '../Logout/AdminLogout';
 
 export default class Admindashboard extends Component {
 
@@ -122,7 +123,7 @@ export default class Admindashboard extends Component {
         </li>
         
          <li>
-          <Logout / >
+          <AdminLogout / >
         </li>
       </ul>
     </div>

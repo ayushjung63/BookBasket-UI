@@ -29,12 +29,7 @@
 	padding: 5px;
 }
 .productHeader{
-	background-color:#4696DC;
-	width: 70%;
-	margin: auto;
-	align-items: center;
-	align-content: center;
-	justify-content: center;
+		padding: 10px;
 }
 .formBtn{
 	margin: auto;

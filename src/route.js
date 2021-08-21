@@ -93,7 +93,7 @@ export class Routes extends Component {
 						
 						<Route exact path="/userdash/:userId" component={Login} />
 						<Route exact path="/bookorder/:id" component={Login} />
-						<Route exact path="/addproducts" component={Addproduct} />
+						<Route exact path="/addproducts" component={Login} />
 						<Route exact path="/editproducts/:id" component={Login} />
 						<Route exact path="/userorders" component={Login} />
 						<Route exact path="/profile" component={Login} />
@@ -108,7 +108,7 @@ export class Routes extends Component {
 						<Route exact path="/userdash/:userId" component={Userdashboard} />
 						<Route exact path="/addproducts" component={Addproduct} />
 						<Route exact path="/editproducts/:id" component={Editproduct} />
-						<Route exact path="/userorders" component={Userorder} />
+						<Route exact path="/userorders/:id" component={Userorder} />
 						<Route exact path="/bookorder/:id" component={Bookorder} />
 						<Route exact path="/profile" component={Profile} />
 

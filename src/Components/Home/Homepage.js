@@ -171,11 +171,11 @@ export class Homepage extends Component {
             {this.state.books.map((item)=>
         <div className="book-card">
           <div className="book-img">
-              <img src={item.image} alt={item.title} />
+              <img className="book-img-1" src={item.image} alt={item.title} />
           </div>
           <div className="book-data">
             <p><b>{item.title}</b></p>
-            <p>by :{item.author}</p>
+            <p>Author :{item.author}</p>
             <p><i>NPR.{item.price}</i></p>
             <button class="view"><a style={{ cursor:"pointer" }} onClick={(e)=>window.location.href=`/pr/${item.id}`}>View More</a></button>
           </div>

@@ -128,38 +128,11 @@ export default class Addproduct extends Component {
       fontFamily: "Arial",
       height: "40px",
     };
+    
 
     return (
       <div>
-        <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-md-none">
-          <a class="navbar-brand mr-lg-5" href="../../index.html">
-            <img
-              class="navbar-brand-dark"
-              src="../../assets/img/brand/light.svg"
-              alt="Volt logo"
-            />{" "}
-            <img
-              class="navbar-brand-light"
-              src="../../assets/img/brand/dark.svg"
-              alt="Volt logo"
-            />
-          </a>
-          <div class="d-flex align-items-center">
-            <button
-              class="navbar-toggler d-md-none collapsed"
-              type="button"
-              data-toggle="collapse"
-              data-target="#sidebarMenu"
-              aria-controls="sidebarMenu"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </div>
-        </nav>
-
-        <div class="container-fluid bg-soft">
+        <div class="container-fluid">
           <div class="row">
             <div class="col-12">
               <nav
@@ -188,6 +161,7 @@ export default class Addproduct extends Component {
                       <a
                         onClick={() => (window.location.href = "/profile")}
                         class="nav-link"
+                        style={{textAlign:"left"}}
                       >
                         <span class="sidebar-icon">
                           <span class="fa fa-user-circle"></span>
@@ -201,6 +175,7 @@ export default class Addproduct extends Component {
                           (window.location.href = `/userdash/${this.state.user.id}`)
                         }
                         class="nav-link"
+                        style={{textAlign:"left"}}
                       >
                         <span class="sidebar-icon">
                           <span class="fa fa-book"></span>
@@ -214,6 +189,7 @@ export default class Addproduct extends Component {
                           (window.location.href = `/bookorder/${this.state.user.id}`)
                         }
                         class="nav-link"
+                        style={{textAlign:"left"}}
                       >
                         <span class="sidebar-icon">
                           <span class="fa fa-cart-plus"></span>
@@ -225,6 +201,7 @@ export default class Addproduct extends Component {
                       <a
                         onClick={() => (window.location.href = "/addproducts")}
                         class="nav-link"
+                        style={{textAlign:"left"}}
                       >
                         <span class="sidebar-icon">
                           <span class="fa fa-plus"></span>
@@ -234,8 +211,9 @@ export default class Addproduct extends Component {
                     </li>
                     <li class="nav-item ">
                       <a
-                        onClick={() => (window.location.href = "/userorders")}
+                       onClick={()=>window.location.href=`/userorders/${this.state.user.id}`}
                         class="nav-link"
+                        style={{textAlign:"left"}}
                       >
                         <span class="sidebar-icon">
                           <span class="fa fa-cart-plus"></span>
@@ -251,38 +229,10 @@ export default class Addproduct extends Component {
               </nav>
 
               <main class="content">
-                <nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark pl-0 pr-2 pb-0">
-                  <div class="container-fluid px-0">
-                    <div
-                      class="d-flex justify-content-between w-100"
-                      id="navbarSupportedContent"
-                    >
-                      <div class="d-flex"></div>
-
-                      <ul class="navbar-nav align-items-center">
-                        <li class="nav-item dropdown">
-                          <a
-                            class="nav-link pt-1 px-0"
-                            href="#"
-                            role="button"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            <div class="media d-flex align-items-center">
-                              <div class="media-body ml-2 text-dark align-items-center d-none d-lg-block"></div>
-                            </div>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </nav>
-
                 <div class="">
                   <main>
                     <div className="productHeader">
-                      <h3 class="h3">Add Book</h3>
+                      <h2 >Add Book</h2>
                       <hr />
                     </div>
                     <div class="add-product">
@@ -339,6 +289,15 @@ export default class Addproduct extends Component {
                                 </option>
                                 <option value="School Books">
                                   School Books
+                                </option>
+                                <option value="College Books">
+                                  Programming
+                                </option>
+                                <option value="College Books">
+                                  Finance
+                                </option>
+                                <option value="College Books">
+                                  Novels
                                 </option>
                                 <option value="Action and Adventure">
                                   Action and Adventure
@@ -410,7 +369,7 @@ export default class Addproduct extends Component {
                                 Book Description
                                 <br />
                                 <textarea
-                                  style={{width:"115%"}}
+                                  style={{width:"115%", height:"50px"}}
                                   onChange={(e) => this.handleChange(e)}
                                   type="textarea"
                                   placeholder="Book Description"

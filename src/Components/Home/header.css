@@ -75,17 +75,20 @@ color: #fff;
 }
 
 .book-data .view{
-width: 100px;
+width: 190px;
 height: 40px;
 padding: 2px;
-border:none;
-background-color:#74A5C6;
-color: #fff;
+border:2px solid #14B28E;
+border-left:none;
+border-right:none;
+background-color: white;
 text-align: center;
 align-self: center;
+transition: 0.5s;
 }
 .book-data .view:hover{
-	background-color:#3A6B8D;
+	background-color:#14B28E;
+	color: white;
 }
 
 .book-data p{
@@ -151,7 +154,6 @@ align-self: center;
 	margin-top: 0px;
 }
 
-@media (min-width: 768px)
 .content {
     margin-left: 0px;
 }
@@ -163,10 +165,10 @@ align-self: center;
 }
 
 .book-content{
-	margin:  0px 80px 0px 80px;
+	margin:  10px 80px 0px 80px;
 	margin-bottom: 50px;
 	display: grid;
-	grid-template-columns: repeat(6, 1fr);
+	grid-template-columns: repeat(5, 1fr);
 }
 
 .product-content{
@@ -208,9 +210,14 @@ align-self: center;
 
 
 .book-img{
+	margin: auto;
 	width: 200px;
-	height: 280px;
-	padding: 5px;
+	height: 310px;
+	padding: 10px;
+}
+.book-img .book-img-1{
+	max-width: 100%;
+	max-height: 100%;
 }
 .book-details{
 	text-align: left;
@@ -225,9 +232,7 @@ align-self: center;
 	margin:auto;
 	width: 500px;
 }
-.orderButton{
-	background-color:#3A6B8D;		
-}
+
 .book{
 	text-align: left;
 }

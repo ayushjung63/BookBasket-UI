@@ -18,11 +18,10 @@ export default class Userorder extends Component {
         open:'',
 		    order:[],
         user:JSON.parse(localStorage.getItem('userinfo')),
-        id:'',
+        id:this.props.match.params.id,
 	}
 
     componentDidMount() {
-        this.state.id=this.state.user.id;
         this.getallOrder();
       
         console.log(this.state.id)
@@ -77,11 +76,7 @@ export default class Userorder extends Component {
           marginBottom:'10px'
          }
          const header={
-           marginTop:"20px",
-           marginBottom:"20px",
-           backgroundColor:"#5B4B48",
-           color:"white",
-           height:"50px"
+           pading:"10px"
          }
          const error={
           fontSize:"40px",
@@ -92,7 +87,7 @@ export default class Userorder extends Component {
         return (
             <div>
 
-        <div class="container-fluid bg-soft">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
 
@@ -104,31 +99,31 @@ export default class Userorder extends Component {
         <Button className="dash"  variant="contained" color="primary" onClick={()=>window.location.href='/'}> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>&nbsp;Return to Home</Button>
         </li>
      <li class="nav-item   ">
-          <a onClick={()=>window.location.href='/profile'} class="nav-link">
+          <a onClick={()=>window.location.href='/profile'} class="nav-link" style={{textAlign:"left"}}>
             <span class="sidebar-icon"><span class="fa fa-user-circle"></span></span>
             <span>{this.state.user.username}</span>
           </a>
         </li>
         <li class="nav-item    ">
-          <a onClick={()=>window.location.href=`/userdash/${this.state.user.id}` } class="nav-link">
+          <a onClick={()=>window.location.href=`/userdash/${this.state.user.id}` } class="nav-link" style={{textAlign:"left"}}>
             <span class="sidebar-icon"><span  class="fa fa-book"></span></span>
             <span>Your Books</span>
           </a>
         </li>
         <li class="nav-item ">
-          <a onClick={()=>window.location.href=`/bookorder/${this.state.user.id}`} class="nav-link">
+          <a onClick={()=>window.location.href=`/bookorder/${this.state.user.id}`} class="nav-link" style={{textAlign:"left"}}>
               <span class="sidebar-icon"><span class="fa fa-cart-plus"></span></span>
               <span>Book Orders</span>
           </a>
         </li>
         <li class="nav-item  ">
-          <a onClick={()=>window.location.href='/addproducts'} class="nav-link">
+          <a onClick={()=>window.location.href='/addproducts'} class="nav-link" style={{textAlign:"left"}}>
               <span class="sidebar-icon"><span class="fa fa-plus"></span></span>
               <span>Add Book</span>
           </a>
         </li>
         <li class="nav-item active">
-          <a onClick={()=>window.location.href='/userorders'} class="nav-link">
+          <a onClick={()=>window.location.href=`/userorders/${this.state.user.id}`} class="nav-link" style={{textAlign:"left"}}>
               <span class="sidebar-icon"><span class="fa fa-cart-plus"></span></span>
               <span>Your Orders</span>
           </a>
@@ -158,9 +153,9 @@ export default class Userorder extends Component {
                     <main class="content">
                 
                        <div>
-                       <Typography gutterBottom variant="body1" style={header}>
+                       <h2 style={header}>
                            Orders Placed
-                        </Typography>
+                        </h2>
                        </div>
 
 

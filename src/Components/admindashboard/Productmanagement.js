@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {getBooks } from '../../apiCall/BookAPI'
 import {approveBooks } from '../../apiCall/BookAPI'
-import { Button } from '@material-ui/core'
+import { Button, ButtonBase, Grid, Paper, Typography } from '@material-ui/core'
 import {deleteBook } from '../../apiCall/BookAPI'
 import Dialog from '@material-ui/core/Dialog';
 import Logout from "../Logout/Logout.js";
@@ -59,14 +59,42 @@ export default class Productmanagement extends Component {
     }
 
     handleDelete=(e,id)=>{
-        deleteBook(id).then(function(res){
-          console.log(res)
-          window.location.reload();
-        }).catch((err)=>console.log(err));
-    }
+      deleteBook(id).then(function(res){
+        console.log(res)
+        window.location.reload()
+      }).catch((err)=>console.log(err));
+  }
 
     
     render() {
+      const imgContainerStyle={
+        width: 128,
+        height: 128,
+       }
+       const imgStyle={
+        margin: 'auto',
+        display: 'block',
+        maxWidth: '100%',
+        maxHeight: '100%',
+       }
+       const paperStyle={
+        padding:'10px',
+        marginTop:"20px",
+        marginBottom:'10px'
+       }
+       const header={
+         marginTop:"20px",
+         marginBottom:"20px",
+         backgroundColor:"#5B4B48",
+         color:"white",
+         height:"50px"
+       }
+       const error={
+        fontSize:"40px",
+        marginTop:"200px",
+        height:"100vh",
+        marginLeft:"120px"
+      }
         return (
             <div>
                 <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-md-none">
@@ -129,72 +157,75 @@ export default class Productmanagement extends Component {
 
                 
                     <main class="content">
+                    <div>
+                       <Typography gutterBottom variant="body1" style={header}>
+                           Book Management
+                        </Typography>
+                       </div>
 
-                       
+                    <div>
+                      {this.state.books.map((item)=>
+                      <Paper style={paperStyle} >
+        <Grid container >
+          <Grid item>
+            <ButtonBase style={imgContainerStyle}>
+              <img alt="complex" src={item.image} style={imgStyle} />
+            </ButtonBase>
+          </Grid>
+          <Grid item sm container>
+            <Grid item xs container direction="column" >
+              <Grid item xs>
+                <Typography gutterBottom variant="subtitle1" align="left">
+                 Title:{item.title}
+                </Typography>
+                <Typography variant="body2" gutterBottom  align="left">
+                  Author:{item.author}
+                </Typography>
+                <Typography variant="body2" gutterBottom  align="left">
+                  Type:{item.type}
+                </Typography>
+                <Typography variant="body2" gutterBottom  align="left" >
+                  Delivery:{item.delivery}
+                </Typography>
+                {(item.status=="AVAILABLE")?
+                <Typography variant="body2" gutterBottom style={{color:"green",fontWeight:600}} align="left" >
+                  Status:{item.status}
+                </Typography>:
+                <Typography variant="body2" gutterBottom style={{color:"#F25B0A",fontWeight:600}} align="left" >
+                Status:{item.status}
+              </Typography>
+                }
+                
+              </Grid>
+            </Grid>
 
-                        <div class="mt-5 px-10">
-                            <table class="table table-hover md-12">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>						
-                                        <th>Author</th>
-                                        <th>Price</th>
-                                        <th>Type</th>
-                                        <th>Status</th>
-                                        <th>Added By</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {this.state.books.map((item)=>
-                                    <tr>
-                                        <td>
-                                            <span class="font-weight-normal">{item.title}</span>
-                                        </td>
-                                        <td><span class="font-weight-normal">{item.author}</span></td>                        
-                                        <td><span class="font-weight-normal">{item.price}</span></td>
-                                        <td><span class="font-weight-bold">{item.type}</span></td>
-                                        <td><span class="font-weight-bold">{item.status}</span></td>
-                                         <td><span class="font-weight-bold">{item.addedBy.username}</span></td>
-                                        <td>
-                                            <div class="btn-group">
-                                            {!(item.status==='AVAILABLE')?
-                                                <Button variant="contained" color="primary" onClick={(e)=>this.approve(e,item.id)} type="submit" >&nbsp;Approve&nbsp;</Button>
-                                                 :<span></span>}
-                                                  &nbsp; &nbsp;<Button variant="contained" color="primary" onClick={(e)=>this.handleDelete(e,item.id)} >Delete</Button> 
-                                            }
-                                            </div>
+           < Grid item xs sm container direction="column" spacing={2}>
+          
+                
+            <Typography gutterBottom variant="subtitle1">
+                  Added By:{item.addedBy.username}
+                </Typography>
+                <Typography gutterBottom variant="subtitle1"  >
+                 Contact:{item.addedBy.contact}
+                </Typography>
+                <Typography gutterBottom variant="subtitle1"  >
+                 Address:{item.addedBy.address}
+                </Typography>
+                <Typography style={{cursor:"pointer",color:"green"}} variant="body" color="textSecondary"  >
+                {(item.status=="ADMINPENDING")?
+                <Button variant="contained" color="primary" onClick={(e)=>this.approve(e,item.id)}>Approve</Button>
+                :<span></span>
+                }
+                &nbsp;<Button variant="contained" color="secondary" onClick={(e)=>this.handleDelete(e,item.id)}>Delete</Button>
+                </Typography>
+          </Grid>
 
-                                             <Dialog
-        open={this.state.open}
-        onClose={this.handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want  to delete <b>{item.title}</b> by <i>{item.author}</i> ?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={(e)=>this.handleDelete(e,item.id)} color="primary">
-            Delete
-          </Button>
-          <Button onClick={(e)=>this.handleClose(e)} color="secondary" autoFocus>
-            Cancel
-          </Button>
-        </DialogActions>
-      </Dialog>
-      
-                                        </td>
-                                    </tr>
-                                    )}
-                           
-                                                
-                                </tbody>
-                            </table>
-                           
-                        </div>
+          </Grid>
+        </Grid>
+      </Paper>
+       )}
+                      </div>
+
                         
                     </main>
                 </div>

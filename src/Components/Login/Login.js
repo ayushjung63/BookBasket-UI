@@ -33,8 +33,7 @@ export class Login extends Component {
 			console.log(localStorage.getItem('userInfo'));	
 			}
 		}).catch((err)=>{
-				this.setState({username:'',password:''});
-				this.setState({error:"ERROR: Could not connect to Server. Please try again later"})
+				this.setState({error:"Bad Credentials. Please try again with valid username and password"})
 		}
 		)
 	}

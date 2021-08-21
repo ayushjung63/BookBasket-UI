@@ -126,6 +126,7 @@ export default class EditProduct extends Component {
                       <a
                         onClick={() => (window.location.href = "/profile")}
                         class="nav-link"
+                        style={{textAlign:"left"}}
                       >
                         <span class="sidebar-icon">
                           <span class="fa fa-user-circle"></span>
@@ -139,6 +140,7 @@ export default class EditProduct extends Component {
                           (window.location.href = `/userdash/${this.state.user.id}`)
                         }
                         class="nav-link"
+                        style={{textAlign:"left"}}
                       >
                         <span class="sidebar-icon">
                           <span class="fa fa-book"></span>
@@ -152,6 +154,7 @@ export default class EditProduct extends Component {
                           (window.location.href = `/bookorder/${this.state.user.id}`)
                         }
                         class="nav-link"
+                        style={{textAlign:"left"}}
                       >
                         <span class="sidebar-icon">
                           <span class="fa fa-cart-plus"></span>
@@ -163,6 +166,7 @@ export default class EditProduct extends Component {
                       <a
                         onClick={() => (window.location.href = "/addproducts")}
                         class="nav-link"
+                        style={{textAlign:"left"}}
                       >
                         <span class="sidebar-icon">
                           <span class="fa fa-plus"></span>
@@ -172,8 +176,9 @@ export default class EditProduct extends Component {
                     </li>
                     <li class="nav-item ">
                       <a
-                        onClick={() => (window.location.href = "/userorders")}
+                     onClick={()=>window.location.href=`/userorders/${this.state.user.id}`}
                         class="nav-link"
+                        style={{textAlign:"left"}}
                       >
                         <span class="sidebar-icon">
                           <span class="fa fa-cart-plus"></span>
@@ -192,7 +197,7 @@ export default class EditProduct extends Component {
                 <div class="">
                   <main>
                     <div className="productHeader">
-                      <h3 class="h3">Edit Book</h3>
+                      <h3>Edit Book</h3>
                       <hr />
                     </div>
                     <div class="add-product">
