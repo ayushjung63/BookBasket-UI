@@ -18,6 +18,7 @@ export class Register extends Component {
 				'email':'',
 				"error":'',
 				"usernameError":"",
+				"emailError":"",
 				"serverError":""
 				}
 		};
@@ -58,14 +59,22 @@ export class Register extends Component {
 		console.log(this.handleValidation())
 		if(this.handleValidation()){
 		
-		if(this.state.error==''){registerUser(this.state.username,this.state.password,this.state.address,this.state.contact,this.state.email,3).then((res)=>{
-			console.log(res);
-			console.log(localStorage.getItem('userInfo'));	
-			window.location.href='/login'
+		if(this.state.error==''){
+			registerUser(this.state.username,this.state.password,this.state.address,this.state.contact,this.state.email,3).then((res)=>{
+				console.log(res.status);
+				if(res.message=="Username taken. Try using other username"){
+				 this.setState({usernameError:res.message});
+				}else if(res.status==409){
+					this.setState({errorError:res.message});
+				}
+				else{	
+				window.location.href='/login'
+				}
 		}).catch((err)=>{
 			// if(err.response.status===404){
 			// 	this.setState({username:'',password:''});
 			// }
+			this.setState({emailError:""});
 			this.setState({serverError:"Could not connect to server. Try again Later"})
 		}
 		)
@@ -83,22 +92,23 @@ export class Register extends Component {
 			<h3 align="center" class="pheader2">
 			Be a part of our platform?
 			</h3>
-				<p style={{color:"red"}}>{this.state.serverError}</p>	
+				<p style={{color:"red"}}>{this.state.serverError}</p>		
 				<form onSubmit={(event)=>this.handleSubmit(event)}>
 			<p>
 				{/*Username:*/}<input type="text" required name="username" placeholder=" username" onChange={(e)=>this.handleChange(e)}  />
-				<p>{this.state.usernameError}</p>
+				<p style={{color:"red"}}>{this.state.usernameError}</p>
 			</p>
 			<p>
 				{/*Address:*/}<input type="text" required name="address" placeholder=" address"  onChange={(e)=>this.handleChange(e)} />
 			</p>
 			<p>
 				{/*Contact:*/}<input type="text" required name="contact" placeholder=" contact" onChange={(e)=>this.handleChange(e)}  />
-				<p>{this.state.error}</p>
+				<p style={{color:"red"}}>{this.state.error}</p>
 			</p>
 			<p>
 			{/*Email:*/} 
 			<input type="text" required name="email" class="inputData" placeholder=" email address"  onChange={(e)=>this.handleChange(e)} />
+			<p style={{color:"red"}}>{this.state.emailError}</p>
 			</p>
 			<p>
 {/*			Password*/}

@@ -157,12 +157,12 @@ export default class Bookorder extends Component {
 
 
                     <div>
-                      {this.state.books.map((item)=>
+                      {this.state.books.reverse().map((item)=>
                       <Paper style={paperStyle} >
         <Grid container >
           <Grid item>
             <ButtonBase style={imgContainerStyle}>
-              <img alt="complex" src={item.image} style={imgStyle} />
+              <img alt="complex" src={item.book.image} style={imgStyle} />
             </ButtonBase>
           </Grid>
           <Grid item sm container>

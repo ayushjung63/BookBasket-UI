@@ -164,7 +164,7 @@ export default class Productmanagement extends Component {
                        </div>
 
                     <div>
-                      {this.state.books.map((item)=>
+                      {this.state.books.reverse().map((item)=>
                       <Paper style={paperStyle} >
         <Grid container >
           <Grid item>

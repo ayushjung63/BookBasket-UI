@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './header.css'
 import HomeIcon from '@material-ui/icons/Home';
+import Logout from '../Logout/Logout';
 
 
 export class LoggedHeader extends Component {
@@ -18,7 +19,8 @@ export class LoggedHeader extends Component {
               <button class="sup" onClick={(e)=>window.location.href=`/userdash/${this.state.user.id}`}>
               <HomeIcon/>View Dashboard
               </button>
-     
+            
+              <Logout />
             </div>
         
         </div>

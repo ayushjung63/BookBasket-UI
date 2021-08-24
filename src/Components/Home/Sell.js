@@ -19,8 +19,9 @@ constructor(props){
   this.state = {
     search:'',
     book: [],
+    sell: [],
     id:this.props.match.params.id,
-    user:localStorage.getItem('userinfo') || null,
+    user:JSON.parse(localStorage.getItem('userinfo')) || null,
     isLogin:localStorage.getItem('userinfo') || false
   }
   }
@@ -35,8 +36,17 @@ constructor(props){
 
   componentDidMount() {
     this.getBook();
-    console.log(this.state.book);
+    this.getOthers();
   }
+
+  getOthers=()=>{
+    for(var i=0;i<this.state.book.length;i++){
+      if(this.state.book[i].addedBy.id!==this.state.user.id){
+        this.setState({sell:this.state.book[i]});
+      }
+    }
+  }
+
     showCategory=(e)=>{
     this.setState({showCategory:!this.state.showCategory})
   }
@@ -47,8 +57,15 @@ constructor(props){
   getBook = () => {
     let self=this;
     getBooksByType("Sell").then(function (res) {
-        self.setState({ book: res.data });
-        console.log(res.data)
+
+      console.log(res)
+      self.setState({ book: res.data });
+      for(var i=0;i<this.state.book.length;i++){
+      if(this.state.book[i].addedBy.id!=this.state.user.id){
+        self.setState({sell:this.state.book[i]});
+      }
+    }
+  
       })
       .catch((err) => console.log(err));
   };
@@ -60,20 +77,7 @@ constructor(props){
     return (
       <div>
        <div className="header">
-        {(() => {
-        if (this.state.isLogin) {
-          return (
-            <div>
-             <LoggedHeader />
-            </div>
-          )
-        }else {
-          return (
-            <div>  <Header2/></div>
-          )
-        }
-      })()}
-
+       <Header2 />
           <div className="header1">
             <h1> <a style={{ cursor:"pointer" }} onClick={()=>window.location.href='/'}> Book Basket</a></h1>
             <div></div>

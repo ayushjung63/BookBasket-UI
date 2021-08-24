@@ -144,7 +144,7 @@ export default class OrderManagement extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {this.state.orders.map((item)=>
+                                {this.state.orders.reverse().map((item)=>
                                     <tr>
                                         <td>
                                             <span class="font-weight-normal">{item.book.title}</span>

@@ -135,7 +135,7 @@ export default class UserManagement extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {this.state.users.map((item)=>
+                                {this.state.users.reverse().map((item)=>
                                     <tr>
                                         <td>
                                             <a href="../invoice.html" class="font-weight-bold">

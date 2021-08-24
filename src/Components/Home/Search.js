@@ -68,19 +68,7 @@ constructor(props){
     return (
       <div>
         <div className="header">
-        {(() => {
-        if (this.state.isLogin) {
-          return (
-            <div>
-             <LoggedHeader />
-            </div>
-          )
-        }else {
-          return (
-            <div>  <Header2/></div>
-          )
-        }
-      })()}
+        <Header2 />
 
           <div className="header1">
             <h1> <a style={{ cursor:"pointer" }} onClick={()=>window.location.href='/'}> Book Basket</a></h1>
@@ -157,7 +145,7 @@ constructor(props){
     {this.state.books.map((item)=>
     <div className="book-card">
           <div className="book-img">
-              <img src={item.image} />
+              <img src={item.image} style={{maxHeight:"100%"}} />
           </div>
          <div className="book-data">
             <p><b>{item.title}</b></p>

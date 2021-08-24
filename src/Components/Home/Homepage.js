@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import createHistory from 'history/createBrowserHistory'
 import "./header.css";
 import {Header2} from "./Header2.js";
 import LoggedHeader from "./LoggedHeader.js";
@@ -30,6 +31,13 @@ export class Homepage extends Component {
   }
   }
   componentDidMount() {
+    const history = createHistory();
+    if (history.location.state && history.location.state.transaction) {
+        let state = { ...history.location.state };
+        delete state.transaction;
+        history.replace({ ...history.location, state });
+    }
+    
      this.getallBooks();
   }
 
@@ -81,9 +89,9 @@ export class Homepage extends Component {
     return (
       <div>
         <div className="header">
-
+        <Header2 />
        
-        {(() => {
+        {/* {(() => {
         if (this.state.isLogin) {
           return (
             <div>
@@ -97,7 +105,7 @@ export class Homepage extends Component {
             </div>
           )
         }
-      })()}
+      })()} */}
      
 
           <div className="header1">
@@ -168,7 +176,7 @@ export class Homepage extends Component {
     
       <div className="book-content">
         
-            {this.state.books.map((item)=>
+            {this.state.books.reverse().map((item)=>
         <div className="book-card">
           <div className="book-img">
               <img className="book-img-1" src={item.image} alt={item.title} />

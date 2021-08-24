@@ -137,7 +137,7 @@ constructor(props){
 			{this.state.book.map((item)=>
 				<div className="book-card">
 					<div className="book-img">
-							<img src={BookImage} />
+							<img src={item.image} style={{maxHeight:"100%"}} />
 					</div>
 					<div className="book-data">
 						<p>{item.title}</p>

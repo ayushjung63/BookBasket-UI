@@ -13,7 +13,7 @@ export default class Logout extends Component {
 	}
 	handleLogout=(e)=>{
         e.preventDefault();
-        localStorage.clear();
+        localStorage.removeItem("userinfo","");
         window.location.href='/'
     }
 

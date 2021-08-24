@@ -36,6 +36,7 @@ body{
 .buttons{
 	margin: auto !important;
 	display: flex;
+	align-items: center;
 }
 
 .buttons p{

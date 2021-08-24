@@ -22,15 +22,12 @@ export class Login extends Component {
 		event.preventDefault();
 		var date=Date.now()
 		addData(this.state.username,this.state.password,3).then((res)=>{
-			console.log(res)
 			if(res==null){
 				this.setState({error:"Bad Credentials. Please try again with valid username and password"})
 			}else{
-			localStorage.setItem("expiry_time",JSON.stringify(date+8640000));
+			localStorage.setItem("expiry_time",JSON.stringify(date+3600));
 			localStorage.setItem("userinfo",JSON.stringify(res));
-			window.location.href=`/userdash/${res.id}`;
-			console.log(res);
-			console.log(localStorage.getItem('userInfo'));	
+			window.location.href=`/userdash/${res.id}`;	
 			}
 		}).catch((err)=>{
 				this.setState({error:"Bad Credentials. Please try again with valid username and password"})

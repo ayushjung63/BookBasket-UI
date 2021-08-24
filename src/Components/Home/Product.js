@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { browserHistory } from 'react-router';
 import "./header.css";
 import BookImage from "./book-img.jpg";
 import { getBookById } from "../../apiCall/BookAPI";
@@ -81,7 +82,15 @@ constructor(props){
     }else{
     orderBook(this.state.book.id,this.state.user.id,3)
     .then(function (res) {
-        window.location.href=`/userorders/${this.state.user.id}`
+      if(res==true){
+       // window.location.href=`/userdash/${this.state.user.id}`
+        window.location.href="/"
+       // window.location.href=`/userorders/${this.state.user.id}`
+        //this.props.history.push(`/userorders/${this.state.user.id}`);
+      }else{
+        alert("Book not available to order or already ordered");
+        window.location.href='/'
+      }
       })
       .catch((err) => console.log(err));
   }
@@ -96,19 +105,7 @@ constructor(props){
     return (
       <div>
         <div className="header">
-        {(() => {
-        if (this.state.isLogin) {
-          return (
-            <div>
-             <LoggedHeader />
-            </div>
-          )
-        }else {
-          return (
-            <div> <Header2/></div>
-          )
-        }
-      })()}
+        <Header2 />
 
            <div className="header1">
             <h1 className="bookbasket"> <a style={{ cursor:"pointer" }} onClick={()=>window.location.href='/'}> Book Basket</a></h1>
@@ -202,7 +199,7 @@ constructor(props){
              {/* onClick={(event)=>this.orderBooks(event)}*/}
              
              {(delivery==="AVAILABLE")
-             ?<Button onClick={(e)=>this.orderBooks(e)} variant="contained" disableElevation color="secondary" className="orderButton" >Order Now</Button>
+             ?<Button onClick={(e)=>this.handleClickOpen(e)} variant="contained" disableElevation color="secondary" className="orderButton" >Order Now</Button>
              :<i><b>Delivery is not available. Please contact the seller for the book.</b></i>
               }
 

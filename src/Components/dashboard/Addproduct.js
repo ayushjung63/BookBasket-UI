@@ -290,13 +290,13 @@ export default class Addproduct extends Component {
                                 <option value="School Books">
                                   School Books
                                 </option>
-                                <option value="College Books">
+                                <option value="Programming">
                                   Programming
                                 </option>
-                                <option value="College Books">
+                                <option value="Finance">
                                   Finance
                                 </option>
-                                <option value="College Books">
+                                <option value="Novels">
                                   Novels
                                 </option>
                                 <option value="Action and Adventure">
