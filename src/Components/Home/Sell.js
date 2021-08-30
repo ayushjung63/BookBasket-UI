@@ -20,7 +20,6 @@ constructor(props){
     search:'',
     book: [],
     sell: [],
-    id:this.props.match.params.id,
     user:JSON.parse(localStorage.getItem('userinfo')) || null,
     isLogin:localStorage.getItem('userinfo') || false
   }
@@ -56,19 +55,20 @@ constructor(props){
 
   getBook = () => {
     let self=this;
-    getBooksByType("Sell").then(function (res) {
-
-      console.log(res)
-      self.setState({ book: res.data });
-      for(var i=0;i<this.state.book.length;i++){
-      if(this.state.book[i].addedBy.id!=this.state.user.id){
-        self.setState({sell:this.state.book[i]});
-      }
-    }
-  
+    if(self.state.isLogin==false){
+      getBooksByType("Sell",0).then(function (res) {
+        self.setState({ book: res.data });
+        console.log(res.data)
+      })
+      .catch((err) => console.log(err));
+  }else{
+    getBooksByType("Sell",this.state.user.id).then(function (res) {
+        self.setState({ book: res.data });
+        console.log(res.data)
       })
       .catch((err) => console.log(err));
   };
+}
   handleSearch=(event)=>{
     window.location.href=`/srch/${this.state.search}`
   }
@@ -104,7 +104,7 @@ constructor(props){
          <ul class="grid-container">
                    <li class="grid-item"><a onClick={(event)=>this.handleCategory("College Books",event)}>College Books</a></li>
                    <li class="grid-item"><a onClick={(event)=>this.handleCategory("School Books",event)}>School Books</a></li>
-                   <li class="grid-item"><a onClick={(event)=>this.handleCategory("Action and Adventure",event)}>Action and Adventure</a></li>
+                   <li class="grid-item"><a onClick={(event)=>this.handleCategory("Programming",event)}>Programming</a></li>
                    <li class="grid-item"><a onClick={(event)=>this.handleCategory("Classics",event)}>Classics</a></li>
                    <li class="grid-item"><a onClick={(event)=>this.handleCategory("Comic",event)}>Comic</a></li>
                    <li class="grid-item"><a onClick={(event)=>this.handleCategory("Fantasy",event)}>Fantasy</a></li>
@@ -112,9 +112,9 @@ constructor(props){
                    <li class="grid-item"><a onClick={(event)=>this.handleCategory("Horror",event)}>Horror</a></li>
                    <li class="grid-item"><a onClick={(event)=>this.handleCategory("Romance",event)}>Romance</a></li>
                    <li class="grid-item"><a onClick={(event)=>this.handleCategory("Science Fiction (Sci-Fi)",event)}>Science Fiction (Sci-Fi)</a></li>
-                   <li class="grid-item"><a onClick={(event)=>this.handleCategory("Short Stories",event)}>Short Stories</a></li>
+                   <li class="grid-item"><a onClick={(event)=>this.handleCategory("Finance",event)}>Finance</a></li>
                    <li class="grid-item"><a onClick={(event)=>this.handleCategory("Biographies and Autobiographies",event)}>Biographies and Autobiographies</a></li>
-                   <li class="grid-item"><a onClick={(event)=>this.handleCategory("Poetry",event)}>Poetry</a></li>
+                   <li class="grid-item"><a onClick={(event)=>this.handleCategory("Novels",event)}>Novels</a></li>
            </ul>
    </div>:''}
    

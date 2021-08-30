@@ -74,19 +74,22 @@ constructor(props){
   };
 
   orderBooks=(event)=>{
-    if(this.state.isLogin==false){
+    let self=this;
+    if(self.state.isLogin==false){
       window.location.href='/login'
     }
-    if(this.state.user ==null || this.state.user==[]|| this.state.user==''){
+    if(self.state.user ==null || self.state.user==[]|| self.state.user==''){
       window.location.href='/login'
     }else{
-    orderBook(this.state.book.id,this.state.user.id,3)
+    orderBook(self.state.book.id,self.state.user.id,3)
     .then(function (res) {
       if(res==true){
-       // window.location.href=`/userdash/${this.state.user.id}`
-        window.location.href="/"
-       // window.location.href=`/userorders/${this.state.user.id}`
-        //this.props.history.push(`/userorders/${this.state.user.id}`);
+        //console.log(res)
+        //console.log(self.state.user)
+       // window.location.href=`/userdash/${self.state.user.id}`
+        //window.location.href="/"
+        window.location.href=`/userorders/${self.state.user.id}`
+        //self.props.history.push(`/userorders/${self.state.user.id}`);
       }else{
         alert("Book not available to order or already ordered");
         window.location.href='/'

@@ -20,7 +20,8 @@ constructor(props){
     book: [],
     search:'',
     category:this.props.match.params.category,
-    user:localStorage.getItem('userinfo') || null,
+    user:JSON.parse(localStorage.getItem('userinfo')) || null,
+    isLogin:localStorage.getItem('userinfo') || false
   }
   }
 
@@ -41,12 +42,20 @@ constructor(props){
 
   getBook = () => {
     let self=this;
-    getBooksByCategory(this.state.category).then(function (res) {
+    if(self.state.isLogin==false){
+    getBooksByCategory(this.state.category,0).then(function (res) {
         self.setState({ book: res.data });
         console.log(res.data)
       })
       .catch((err) => console.log(err));
-  };
+    }else{
+      getBooksByCategory(this.state.category,this.state.user.id).then(function (res) {
+        self.setState({ book: res.data });
+        console.log(res.data)
+      })
+      .catch((err) => console.log(err));
+    }
+    };
   handleSearch=(event)=>{
     if(this.state.search==''){
       window.location.href='/srch'

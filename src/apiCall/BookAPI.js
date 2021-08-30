@@ -69,16 +69,22 @@ export function deleteBook(id){
 }
 
 
-export function getBooksByCategory(category){
+export function getBooksByCategory(category,id){
+	var data={
+		"id":id
+	}
 	return new Promise(function (resolve,reject) {
-		axios.get(`http://localhost:8085/api/book/category/${category}`).then((res)=>
+		axios.post(`http://localhost:8085/api/book/category/${category}`,data).then((res)=>
 			resolve(res)).catch((err)=>reject(err))
 	})
 }
 
-export function getBooksByType(type){
+export function getBooksByType(type,id){
+	var data={
+		"id":id
+	}
 	return new Promise(function (resolve,reject) {
-		axios.get(`http://localhost:8085/api/book/type/${type}`).then((res)=>
+		axios.post(`http://localhost:8085/api/book/type/${type}`,data).then((res)=>
 			resolve(res)).catch((err)=>reject(err))
 	})
 }

@@ -156,6 +156,7 @@ export default class Userorder extends Component {
                        <h2 style={header}>
                            Orders Placed
                         </h2>
+                        <hr/>
                        </div>
 
 

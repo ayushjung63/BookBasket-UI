@@ -140,7 +140,7 @@ export default class OrderManagement extends Component {
                                         <th>Added By</th>			
                                         <th>Ordered By</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        {/* <th>Action</th> */}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -152,13 +152,19 @@ export default class OrderManagement extends Component {
                                         <td><span class="font-weight-normal">{item.book.addedBy.username}</span></td> 
                                         <td><span class="font-weight-normal">{item.user.username}</span></td>                        
                                        
-                                        <td><span class="font-weight-bold text-warning">{item.status}</span></td>
                                         <td>
+                                          {item.status==1?
+                                          <span class="font-weight-bold text-success">ACTIVE</span>
+                                          :<span class="font-weight-bold text-warning">CANCELLED</span>
+                                        }
+                                          </td>
+                                          
+                                        {/* <td>
                                         <div class="btn-group">
                                                 <Button variant="contained" color="primary" onClick={(e)=>this.cancelOrders(e,item.id)}>Cancel</Button>&nbsp;
                                                  <Button variant="contained" color="primary" onClick={(e)=>this.deleteOrder(e,item.id,item.book.id)}>Delete</Button>
                                             </div>
-                                        </td>
+                                        </td> */}
                                     </tr>
                            
                                 )}        
