@@ -26,6 +26,7 @@ import Search  from './Components/Home/Search.js';
 import Category  from './Components/Home/Category.js';
 import EmptyBooks  from './Components/Home/EmptyBooks.js';
 import ImageUpload  from './Components/Home/ImageUpload.js';
+import BillingPage from './Components/Payment/BillingPage.js';
 
 export class Routes extends Component {
 	constructor(props){ 
@@ -84,6 +85,7 @@ export class Routes extends Component {
 						<Route exact path="/" component={Homepage} />
 						<Route exact path="/pr" component={DummyProduct} />
 						<Route exact path="/pr/:id" component={Product} />
+						<Route exact path="/billing" component={BillingPage} />
 						<Route exact path="/sell" component={Sell} />
 						<Route exact path="/borrow" component={Borrow} />
 						<Route exact path="/srch" component={Search} />

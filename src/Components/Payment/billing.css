@@ -1,0 +1,26 @@
+.billing{
+    overflow: hidden;
+    align-items: center;
+    text-align: center;
+}
+.billing form{
+    margin: auto;
+    justify-content: center;
+}
+.billing input{
+    width: 50%;
+}
+
+.cash{
+    height: 50px;
+    margin-bottom: 20px;
+    border: none;
+    outline: none;
+    background-color: #14B28E;
+	color: #eee;
+    margin-right: 20px;
+}
+.esewa{
+    height: 50px;
+    cursor: pointer;
+}

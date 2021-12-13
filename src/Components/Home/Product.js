@@ -73,6 +73,12 @@ constructor(props){
       .catch((err) => console.log(err));
   };
 
+  billingPage=(e)=>{
+    e.preventDefault();
+    let self=this;
+    window.location.href='/billing'
+  }
+
   orderBooks=(event)=>{
     let self=this;
     if(self.state.isLogin==false){
@@ -218,7 +224,7 @@ constructor(props){
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={(e)=>this.orderBooks(e)} color="primary">
+          <Button onClick={(e)=>this.billingPage()} color="primary">
             Order Now
           </Button>
           <Button onClick={(e)=>this.handleClose(e)} color="secondary" autoFocus>

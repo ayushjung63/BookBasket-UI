@@ -62,6 +62,12 @@ constructor(props){
  this.setState({showCategory:!this.state.showCategory})
   }
 
+  billingPage=(e)=>{
+    e.preventDefault();
+    let self=this;
+    window.location.href='/billing'
+  }
+
   render() {
     return (
       <div>
@@ -179,7 +185,7 @@ constructor(props){
           </DialogContentText>*/}
         </DialogContent>
         <DialogActions>
-          <Button onClick={(e)=>this.orderBooks(e)} color="primary">
+          <Button onClick={(e)=>this.billingPage(e)} color="primary">
             Order Now
           </Button>
           <Button onClick={(e)=>this.handleClose(e)} color="secondary" autoFocus>
